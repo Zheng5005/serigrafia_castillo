@@ -27,6 +27,15 @@ Route::get('/home', [HomeController::class, 'index'])
 ->middleware(['auth'])
 ->name('home');
 
+Route::get('/tazas', [HomeController::class, 'tazasindex'])
+->middleware(['auth']);
+
+Route::get('/banners', [HomeController::class, 'bannersindex'])
+->middleware(['auth']);
+
+Route::get('/camisas', [HomeController::class, 'camisasindex'])
+->middleware(['auth']);
+
 /*Route::get('post', [HomeController::class, 'post'])->middleware(['auth','admin']) */
 
 Route::middleware('auth')->group(function () {
