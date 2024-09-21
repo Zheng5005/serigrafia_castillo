@@ -44,7 +44,7 @@
                                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $rs->status }}</td>
                                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                                    <a href="{{ route('user.edit', $rs->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                                 </div>
                                             </td>
                                         </tr>
