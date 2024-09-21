@@ -25,17 +25,17 @@ Route::get('/', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');*/
 
 Route::get('/home', [HomeController::class, 'index'])
-->middleware(['auth'])
+->middleware(['auth', 'active'])
 ->name('home');
 
 Route::get('/tazas', [HomeController::class, 'tazasindex'])
-->middleware(['auth']);
+->middleware(['auth', 'active']);
 
 Route::get('/banners', [HomeController::class, 'bannersindex'])
-->middleware(['auth']);
+->middleware(['auth', 'active']);
 
 Route::get('/camisas', [HomeController::class, 'camisasindex'])
-->middleware(['auth']);
+->middleware(['auth', 'active']);
 
 /*Route::get('post', [HomeController::class, 'post'])->middleware(['auth','admin']) */
 Route::resource('/user',UserController::class)
