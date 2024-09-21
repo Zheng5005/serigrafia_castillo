@@ -20,6 +20,10 @@
                         {{ __('Users') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('order.index')" :active="request()->routeIs('/user')">
+                        {{ __('Orders') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Cupons') }}
                     </x-nav-link>

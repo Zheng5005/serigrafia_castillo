@@ -11,6 +11,5 @@ class Order extends Model
 
     protected $fillable = [
         'status',
-        'total',
     ];
 }
