@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeOrderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
@@ -45,6 +46,9 @@ Route::resource('/user',UserController::class)
 
 Route::resource('/order',OrderController::class)
 ->middleware(['auth','admin']);
+
+Route::resource('/order_employee',EmployeeOrderController::class)
+->middleware(['auth', 'employee']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
