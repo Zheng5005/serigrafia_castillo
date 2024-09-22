@@ -27,6 +27,10 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Camisas') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('historial.index')" :active="request()->routeIs('home')">
+                        {{ __('Historial') }}
+                    </x-nav-link>
                 </div>
             </div>
 

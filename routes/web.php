@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeOrderController;
+use App\Http\Controllers\HistorialController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
@@ -38,6 +39,9 @@ Route::get('/banners', [HomeController::class, 'bannersindex'])
 ->middleware(['auth', 'active']);
 
 Route::get('/camisas', [HomeController::class, 'camisasindex'])
+->middleware(['auth', 'active']);
+
+Route::resource('/historial',HistorialController::class)
 ->middleware(['auth', 'active']);
 
 /*Route::get('post', [HomeController::class, 'post'])->middleware(['auth','admin']) */
