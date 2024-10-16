@@ -7,6 +7,8 @@ use App\Models\Order_Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function Laravel\Prompts\select;
+
 class EmployeeOrderController extends Controller
 {
     /**
@@ -14,7 +16,14 @@ class EmployeeOrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::get();
+        $orders = DB::table('orders')
+                    ->join('users', 'orders.created_by', '=', 'users.id')
+                    ->select('users.name', 'orders.*')
+                    ->where('orders.status', '!=', 'Terminado')
+                    ->orderBy('orders.id')
+                    ->get();
+
+        //$orders = Order::get();
  
         return view('order_employee.index', compact('orders'));
     }
@@ -42,6 +51,14 @@ class EmployeeOrderController extends Controller
     {
         $orders_items = DB::table('order__items')
                         ->where('order_id', $id)->get();
+
+        return view('order_employee.show', compact('orders_items'));
+    }
+
+    public function show_filter(string $name)
+    {
+        $orders_items = DB::table('order__items')
+                        ->where('order_id', $name)->get();
 
         return view('order_employee.show', compact('orders_items'));
     }

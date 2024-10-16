@@ -15,7 +15,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::get();
+        $orders = DB::table('orders')
+        ->join('users', 'orders.created_by', '=', 'users.id')
+        ->select('users.name', 'orders.*')
+        ->orderBy('orders.id')
+        ->get();
  
         return view('order.index', compact('orders'));
     }
