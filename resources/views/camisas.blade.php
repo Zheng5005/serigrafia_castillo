@@ -11,7 +11,11 @@
 
                 <form action="{{ url('categories/create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
+                    <div>
+                        <x-input-label for="ID" :value="__('ID del producto:')" />
+                        <x-text-input id="ID" class="block mt-1 w-full" type="text" name="ID" :value="$product" readonly/>
+                        <x-input-error :messages="$errors->get('Amount')" class="mt-2" />
+                    </div>
                     <!-- Quantity -->
                     <div>
                         <x-input-label for="Amount" :value="__('Cantidad')" />

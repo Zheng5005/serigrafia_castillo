@@ -7,7 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleLoginController;
-use App\Models\Order;
+use App\Http\Controllers\CarsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,42 +25,65 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');*/
-
+/*User filter based on usertype*/
 Route::get('/home', [HomeController::class, 'index'])
 ->middleware(['auth', 'active'])
 ->name('home');
 
-Route::get('/tazas', [HomeController::class, 'tazasindex'])
-->middleware(['auth', 'active']);
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
 
-Route::get('/banners', [HomeController::class, 'bannersindex'])
-->middleware(['auth', 'active']);
+/*Products view*/
+Route::get('/tazas', [CarsController::class, 'tazasindex'])
+->middleware(['auth', 'active'])
+->name('tazas');
 
-Route::get('/camisas', [HomeController::class, 'camisasindex'])
-->middleware(['auth', 'active']);
+Route::get('/banners', [CarsController::class, 'bannersindex'])
+->middleware(['auth', 'active'])
+->name('banners');
 
+Route::get('/camisas', [CarsController::class, 'camisasindex'])
+->middleware(['auth', 'active'])
+->name('camisas');
+
+Route::controller(
+    CarsController::class)->group(function () {
+       Route::get('cars', 'index');
+       Route::post('cars/createtazas', 'storetazas');
+
+       Route::get('cars/{id}/edit', 'edit');
+       Route::put('cars/{id}/edit', 'update');
+
+       Route::get('cars/{id}/delete', 'destroy');
+   });
+
+/*History*/
 Route::resource('/historial',HistorialController::class)
 ->middleware(['auth', 'active']);
 
-/*Route::get('post', [HomeController::class, 'post'])->middleware(['auth','admin']) */
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*User management*/
 Route::resource('/user',UserController::class)
 ->middleware(['auth','admin']);
 
+/*Order management (Admin)*/
 Route::resource('/order',OrderController::class)
 ->middleware(['auth','admin']);
 
+/*Order management (employee)*/
 Route::resource('/order_employee',EmployeeOrderController::class)
 ->middleware(['auth', 'employee']);
 
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Login with Breeze*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+/*Login with Google*/
 Route::get('/google/redirect', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 

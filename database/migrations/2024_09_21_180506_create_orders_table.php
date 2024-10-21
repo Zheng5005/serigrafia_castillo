@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
+            $table->string('status')->default('Ordenado');
             $table->decimal('total', 10, 2);
             $table->timestamps();
             $table->foreignIdFor(User::class, 'created_by')->nullable();

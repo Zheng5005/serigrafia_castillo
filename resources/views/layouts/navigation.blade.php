@@ -16,19 +16,19 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('tazas')" :active="request()->routeIs('/tazas')">
                         {{ __('Tazas') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('banners')" :active="request()->routeIs('/banners')">
                         {{ __('Banner') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('camisas')" :active="request()->routeIs('/camisas')">
                         {{ __('Camisas') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('historial.index')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('historial.index')" :active="request()->routeIs('/historial')">
                         {{ __('Historial') }}
                     </x-nav-link>
                 </div>

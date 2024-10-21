@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('unit_price');
             $table->string('description');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

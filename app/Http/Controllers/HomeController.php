@@ -34,41 +34,4 @@ class HomeController extends Controller
             }
         }
     }
-
-    public function tazasindex()
-    {
-        if(Auth::id())
-        {
-            return view('tazas');
-        }
-        else
-        {
-            return redirect()->back();
-        }
-    }
-
-    public function bannersindex()
-    {
-        if(Auth::id())
-        {
-            return view('banners');
-        }
-        else
-        {
-            return redirect()->back();
-        }
-    }
-
-    public function camisasindex()
-    {
-        if(Auth::id())
-        {
-            return view('camisas');
-        }
-        else
-        {
-            return redirect()->back();
-        }
-    }
-
 }
