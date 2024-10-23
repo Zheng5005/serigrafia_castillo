@@ -9,44 +9,43 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-800">
 
-                <form action="{{ url('categories/create') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('cars/createbanners') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
-                        <x-input-label for="ID" :value="__('ID del producto:')" />
-                        <x-text-input id="ID" class="block mt-1 w-full" type="text" name="ID" :value="$product" readonly/>
-                        <x-input-error :messages="$errors->get('Amount')" class="mt-2" />
+                        <x-input-label for="product_id" :value="__('ID del producto:')" />
+                        <x-text-input id="product_id" class="block mt-1 w-full" type="text" name="product_id" :value="$product" readonly/>
+                        <x-input-error :messages="$errors->get('product_id')" class="mt-2" />
                     </div>
                     <!-- Quantity -->
                     <div>
-                        <x-input-label for="Amount" :value="__('Cantidad')" />
-                        <x-text-input id="Amount" class="block mt-1 w-full" type="number" name="Amount" :value="old('Amount')" />
-                        <x-input-error :messages="$errors->get('Amount')" class="mt-2" />
+                        <x-input-label for="quantity" :value="__('Cantidad')" />
+                        <x-text-input id="quantity" class="block mt-1 w-full" type="number" name="quantity" :value="old('quantity')" />
+                        <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
                     </div>
 
                     <!-- Height -->
                     <div>
-                        <x-input-label for="Height" :value="__('Alto')" />
-                        <x-text-input id="Height" class="block mt-1 w-full" type="number" name="Height" :value="old('Height')" />
-                        <x-input-error :messages="$errors->get('Height')" class="mt-2" />
+                        <x-input-label for="height" :value="__('Alto')" />
+                        <x-text-input id="height" class="block mt-1 w-full" type="number" step="0.01" name="height" :value="old('height')" />
+                        <x-input-error :messages="$errors->get('height')" class="mt-2" />
                     </div>
 
                     <!-- Width -->
                     <div>
-                        <x-input-label for="Width" :value="__('Largo')" />
-                        <x-text-input id="Width" class="block mt-1 w-full" type="number" name="Width" :value="old('Width')" />
-                        <x-input-error :messages="$errors->get('Width')" class="mt-2" />
+                        <x-input-label for="width" :value="__('Largo')" />
+                        <x-text-input id="width" class="block mt-1 w-full" type="number" step="0.01" name="width" :value="old('width')" />
+                        <x-input-error :messages="$errors->get('width')" class="mt-2" />
                     </div>
 
                     <!-- Description -->
                     <div class="mt-4">
-                        <x-input-label for="Description" :value="__('Descripción')" />
-                        <!-- <x-text-input id="Description" class="block mt-1 w-full" type="text" name="Description"
-                        class="block w-full p-4 text-gray-900 border rounded-lg text-base focus:ring-blue-500 focus:border-blue-500" /> -->
-
+                        <x-input-label for="description" :value="__('Descripción')" />
                         
-                        <textarea id="Description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                       <!-- <textarea id="Description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea> -->
 
-                        <x-input-error :messages="$errors->get('Description')" class="mt-2" />
+                        <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" />
+
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
 
                     <br>
