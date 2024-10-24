@@ -17,6 +17,7 @@ class Car extends Model
         'total',
         'description',
         'image',
+        'payment',
         'status'
     ];
 }

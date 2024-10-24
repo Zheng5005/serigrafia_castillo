@@ -36,7 +36,7 @@
                             <tbody>
                                 @if($car->count() > 0)
                                     @foreach($car as $rs)
-                                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
                                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}</td>
                                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $rs->name }}</td>
                                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $rs->quantity }}</td>
@@ -46,7 +46,7 @@
                                                     {{ $rs->description }}
                                                 </textarea>
                                             </td>
-                                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <a href="{{ route('historial.show', $rs->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalles</a>
                                                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Eliminar</a>
@@ -54,8 +54,17 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                @else
                                     <tr>
+                                        <td colspan="4" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-right">Total:</td>
+                                        <td id="car_total" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">{{ $car_total }}</td>
+                                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a href="{{ url('cars/storecar') }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline text-center">Ordenar</a>
+                                                </div>
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                         <td class="text-center" colspan="5">Car not found</td>
                                     </tr>
                                 @endif

@@ -23,9 +23,6 @@
                                         Cantidad
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Precio Unitario
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
                                         Descripcion
                                     </th>
                                 </tr>
@@ -37,8 +34,11 @@
                                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $loop->iteration }}</td>
                                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $rs->product_id }}</td>
                                             <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $rs->quantity }}</td>
-                                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $rs->unit_price }}</td>
-                                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $rs->description }}</td>
+                                            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                <textarea rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    {{ $rs->description }}
+                                                </textarea>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @else

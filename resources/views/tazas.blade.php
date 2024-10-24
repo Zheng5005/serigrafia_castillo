@@ -11,11 +11,6 @@
 
                 <form action="{{ url('cars/createtazas') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div>
-                        <x-input-label for="product_id" :value="__('ID del producto:')" />
-                        <x-text-input id="product_id" class="block mt-1 w-full" type="text" name="product_id" :value="$product" readonly/>
-                        <x-input-error :messages="$errors->get('product_id')" class="mt-2" />
-                    </div>
                     <!-- Quantity -->
                     <div>
                         <x-input-label for="quantity" :value="__('Cantidad')" />

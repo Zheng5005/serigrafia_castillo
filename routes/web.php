@@ -51,6 +51,7 @@ Route::controller(
        Route::post('cars/createtazas', 'storetazas');
        Route::post('cars/createbanners', 'storebanners');
        Route::post('cars/createcamisas', 'storecamisas');
+       Route::get('cars/storecar', 'storecar');
 
        Route::get('cars/{id}/edit', 'edit');
        Route::put('cars/{id}/edit', 'update');

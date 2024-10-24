@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Order;
+use App\Models\Order_Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,15 +33,19 @@ class CarsController extends Controller
                         ->orderBy('id')
                         ->get();
 
-        return view('cars.index', compact('car'));
+        $car_total = DB::table('cars')
+                        ->where('created_by', $id)
+                        ->where('payment', '!=', 'SI')
+                        ->sum('total');
+
+        return view('cars.index', compact('car', 'car_total'));
     }
 
     public function tazasindex()
     {
         if(Auth::id())
         {
-            $product = 2;
-            return view('tazas', compact('product'));
+            return view('tazas');
         }
         else
         {
@@ -51,8 +57,7 @@ class CarsController extends Controller
     {
         if(Auth::id())
         {
-            $product = 1;
-            return view('camisas', compact('product'));
+            return view('camisas');
         }
         else
         {
@@ -64,8 +69,7 @@ class CarsController extends Controller
     {
         if(Auth::id())
         {
-            $product = 3;
-            return view('banners', compact('product'));
+            return view('banners');
 
         }
         else
@@ -84,21 +88,20 @@ class CarsController extends Controller
         }
 
         $request->validate([
-            'product_id' => 'required|int',
             'quantity' => 'required|int',
             'description' => 'required|string'
         ]);
 
         Car::create([
             'created_by' => $id_user,
-            'product_id' => $request->product_id,
+            'product_id' => 2,
             'quantity' => $request->quantity,
             'unit_price' => 5.00,
             'total' => (($request->quantity) * 5.00),
             'description' => $request->description,
         ]);
 
-        return redirect('cars.index');
+        return redirect('cars');
     }
 
     public function storebanners(Request $request)
@@ -111,7 +114,6 @@ class CarsController extends Controller
         }
 
         $request->validate([
-            'product_id' => 'required|int',
             'quantity' => 'required|int',
             'height' => 'required',
             'width' => 'required',
@@ -120,14 +122,14 @@ class CarsController extends Controller
 
         Car::create([
             'created_by' => $id_user,
-            'product_id' => $request->product_id,
+            'product_id' => 3,
             'quantity' => $request->quantity,
             'unit_price' => 7.00,
             'total' => (($request->quantity) * (($request->height + $request->width) * 7.00)),
             'description' => "Alto: {$request->height}\nLargo: {$request->width}\n{$request->description}",
         ]);
 
-        return redirect('cars.index');
+        return redirect('cars');
     }
 
     public function storecamisas(Request $request)
@@ -156,6 +158,55 @@ class CarsController extends Controller
         ]);
 
         return redirect('cars');
+    }
+
+    public function storecar()
+    {
+        $id_user = null;
+
+        if(Auth::id())
+        {
+            $id_user = Auth()->user()->id;
+        }
+
+        $car_total = DB::table('cars')
+                        ->where('created_by', $id_user)
+                        ->where('payment', '!=', 'SI')
+                        ->sum('total');
+
+        $car = DB::table('cars')
+                        ->select('cars.*')
+                        ->where('created_by', $id_user)
+                        ->where('payment', '!=', 'SI')
+                        ->orderBy('id')
+                        ->get();
+                        
+        $order_id = DB::table('orders')
+                        ->select('id')
+                        ->orderBy('id', 'desc')
+                        ->limit(1);
+
+        $order = Order::create([
+            'total' => $car_total,
+            'created_by' => $id_user,
+        ]);
+
+        foreach ($car as $car_item) {
+            Order_Item::create([
+                'order_id' => $order->id,
+                'product_id' => $car_item->product_id,
+                'quantity' => $car_item->quantity,
+                'unit_price' => $car_item->unit_price,
+                'description' => $car_item->description
+            ]);
+
+            $car_up = Car::findOrFail($car_item->id);
+            $car_up->update([
+                'payment' => 'SI',
+            ]);
+        }
+
+        return view('dashboard');
     }
 
 }
